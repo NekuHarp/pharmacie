@@ -1,6 +1,7 @@
 package application;
 	
 import javafx.application.Application;
+import javafx.scene.Parent;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -11,11 +12,18 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			BorderPane root = (BorderPane)FXMLLoader.load(getClass().getResource("Sample.fxml"));
-			Scene scene = new Scene(root,400,400);
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-			primaryStage.setScene(scene);
+			FXMLLoader loader = new FXMLLoader(getClass().getResource(
+					"Sample.fxml"));
+			Parent root = loader.load();
+			Controller controller = loader.getController();
+
+			primaryStage.setTitle("Produits frais pour grossiste");
+			primaryStage.setScene(new Scene(root, 800, 600));
+			primaryStage.setResizable(false);
 			primaryStage.show();
+
+			//splitpanebase.lookupAll(".split-pane-divider").stream()
+			//		.forEach(div ->  div.setMouseTransparent(true) );
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
