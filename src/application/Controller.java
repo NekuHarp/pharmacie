@@ -16,14 +16,41 @@ import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
 import java.io.File;
+import java.util.Date;
 
 public class Controller {
 
     @FXML
-    private TextField SellItemField;
+    private TextField NameComField;
 
     @FXML
-    private Button SellItemBtn;
+    private TextField NbrEmpComField;
+
+    @FXML
+    private TextField CompteComField;
+
+    @FXML
+    private DatePicker DateComPicker;
+
+    @FXML
+    private TextField NbrItemField;
+
+    @FXML
+    private ComboBox TypeComCombo;
+
+    @FXML
+    private ComboBox CompteComCombo;
+
+    @FXML
+    private ListView ComListview;
+
+    @FXML
+    private ListView ItemListview;
+
+    @FXML
+    private Button ValComBtn;
+
+    public Grossiste grossiste = new Grossiste();
 
     public Controller() {
     }
@@ -31,22 +58,52 @@ public class Controller {
     @FXML
     private void initialize() {
 
-        SellItemField.textProperty().addListener(new ChangeListener<String>() {
+        NbrItemField.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue,
                                 String newValue) {
                 if (newValue.matches("\\d*")) {
                     int value = Integer.parseInt(newValue);
                 } else {
-                    SellItemField.setText(oldValue);
+                    NbrItemField.setText(oldValue);
                 }
             }
         });
 
-        SellItemBtn.setOnAction(new EventHandler<ActionEvent>() {
+        CommerceFranchisé Test = new CommerceFranchisé("Test",123,"s1r3tlol",new Date(1996,12,30));
+        grossiste.listeCommerce.add(Test);
+
+        TypeComCombo.getItems().addAll("Indépendant","Franchisé");
+        CompteComCombo.getItems().addAll("Visa","Mastercard");
+        TypeComCombo.getSelectionModel().selectFirst();
+        CompteComCombo.getSelectionModel().selectFirst();
+
+        TypeComCombo.valueProperty().addListener(new ChangeListener<String>() {
+            @Override public void changed(ObservableValue ov, String t, String t1) {
+                System.out.println(ov);
+                System.out.println(t);
+                System.out.println(t1);
+            }
+        });
+
+        CompteComCombo.valueProperty().addListener(new ChangeListener<String>() {
+            @Override public void changed(ObservableValue ov, String t, String t1) {
+                System.out.println(ov);
+                System.out.println(t);
+                System.out.println(t1);
+            }
+        });
+
+        ComListview.setItems(grossiste.listeCommerce);
+
+        ItemListview.setItems(grossiste.listeProduit);
+
+
+
+        ValComBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
-                System.out.println(SellItemField.getText());
+                System.out.println(NameComField.getText());
             }
         });
 
