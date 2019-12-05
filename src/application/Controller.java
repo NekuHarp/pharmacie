@@ -70,10 +70,11 @@ public class Controller {
             }
         });
 
-        CommerceFranchisé Test = new CommerceFranchisé("Test",123,"s1r3tlol",new Date(1996,12,30));
+        
+		CommerceFranchise Test = new CommerceFranchise("Test",123,new Date(1996,12,30),"s1r3tlol");
         grossiste.listeCommerce.add(Test);
 
-        TypeComCombo.getItems().addAll("Indépendant","Franchisé");
+        TypeComCombo.getItems().addAll("Independant","Franchise");
         CompteComCombo.getItems().addAll("Visa","Mastercard");
         TypeComCombo.getSelectionModel().selectFirst();
         CompteComCombo.getSelectionModel().selectFirst();

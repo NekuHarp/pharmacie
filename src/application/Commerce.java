@@ -8,44 +8,115 @@ import java.util.Date;
 
 public abstract class Commerce {
 
-    public String nom;
-    public int nbEmployé;
-    public ObservableList<Produit> listeProduit;
-    public Date datePartenariat;
+    private String nom;
+    private int nbEmploye;
+    private ObservableList<Produit> listeProduit;
+    private Date datePartenariat;
 
-    public Commerce(){
-        nom = null;
-        nbEmployé = 0;
-        listeProduit = FXCollections.observableArrayList();
-        datePartenariat = null;
+    public Commerce(String nom, int nbEmploye, Date date){
+    	this.setNom(nom);
+        this.setNbEmploye(0);
+        this.setDatePartenariat(date);
+        
+        this.setListeProduit(FXCollections.observableArrayList());
     }
+
+	public Date getDatePartenariat() {
+		return datePartenariat;
+	}
+
+	public void setDatePartenariat(Date datePartenariat) {
+		this.datePartenariat = datePartenariat;
+	}
+
+	public int getNbEmploye() {
+		return nbEmploye;
+	}
+
+	public void setNbEmploye(int nbEmploye) {
+		this.nbEmploye = nbEmploye;
+	}
+
+	public String getNom() {
+		return nom;
+	}
+
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+
+	public ObservableList<Produit> getListeProduit() {
+		return listeProduit;
+	}
+
+	public void setListeProduit(ObservableList<Produit> listeProduit) {
+		this.listeProduit = listeProduit;
+	}
 
 }
 
-class CommerceIndépendant extends Commerce {
+class CommerceIndependant extends Commerce {
 
-    public double taille;
+	private double taille;
+	
+	private EtatAnnee etatAnnee;
+    
 
-    public CommerceIndépendant(String a, int b, double c, Date d){
-        nom = a;
-        nbEmployé = b;
-        listeProduit = FXCollections.observableArrayList();
-        taille = c;
-        datePartenariat = d;
+    public CommerceIndependant(String nom, int nbEmploye, Date date, double taille, int nbAnneePartenariat){
+        super(nom, nbEmploye, date);
+        
+        this.setTaille(taille);
+        
+        EtatAnnee newEtatAnnee;
+        if (nbAnneePartenariat < 2) {
+        	newEtatAnnee = new MoinsDeuxAns();
+        }
+        else if (nbAnneePartenariat > 4) {
+        	newEtatAnnee = new PlusCinqAns();
+		}
+        else {
+        	newEtatAnnee = new PlusCinqAns();
+		}
+        this.setEtatAnnee(newEtatAnnee);
     }
+
+
+	public double getTaille() {
+		return taille;
+	}
+
+
+	public void setTaille(double taille) {
+		this.taille = taille;
+	}
+
+
+	public EtatAnnee getEtatAnnee() {
+		return etatAnnee;
+	}
+
+
+	public void setEtatAnnee(EtatAnnee etatAnnee) {
+		this.etatAnnee = etatAnnee;
+	}
 
 }
 
-class CommerceFranchisé extends Commerce {
+class CommerceFranchise extends Commerce {
 
-    public String siret;
+	private String siret;
 
-    public CommerceFranchisé(String a, int b, String c, Date d){
-        nom = a;
-        nbEmployé = b;
-        listeProduit = FXCollections.observableArrayList();
-        siret = c;
-        datePartenariat = d;
+    public CommerceFranchise(String nom, int nbEmploye, Date date, String siret){
+    	super(nom, nbEmploye, date);
+        this.setSiret(siret);
     }
+
+	public String getSiret() {
+		return siret;
+	}
+
+	public void setSiret(String siret) {
+		this.siret = siret;
+	}
 
 }
