@@ -3,29 +3,28 @@ package application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.util.ArrayList;
-import java.util.Date;
+import java.time.LocalDate;
 
 public abstract class Commerce {
 
     private String nom;
     private int nbEmploye;
     private ObservableList<Produit> listeProduit;
-    private Date datePartenariat;
+    private LocalDate datePartenariat;
 
-    public Commerce(String nom, int nbEmploye, Date date){
+    public Commerce(String nom, int nbEmploye, LocalDate date){
     	this.setNom(nom);
-        this.setNbEmploye(0);
+        this.setNbEmploye(nbEmploye);
         this.setDatePartenariat(date);
         
         this.setListeProduit(FXCollections.observableArrayList());
     }
 
-	public Date getDatePartenariat() {
+	public LocalDate getDatePartenariat() {
 		return datePartenariat;
 	}
 
-	public void setDatePartenariat(Date datePartenariat) {
+	public void setDatePartenariat(LocalDate datePartenariat) {
 		this.datePartenariat = datePartenariat;
 	}
 
@@ -53,6 +52,10 @@ public abstract class Commerce {
 		this.listeProduit = listeProduit;
 	}
 
+	public abstract String getBonus();
+
+    public abstract void setBonus(String x);
+
 }
 
 class CommerceIndependant extends Commerce {
@@ -62,7 +65,7 @@ class CommerceIndependant extends Commerce {
 	private EtatAnnee etatAnnee;
     
 
-    public CommerceIndependant(String nom, int nbEmploye, Date date, double taille, int nbAnneePartenariat){
+    public CommerceIndependant(String nom, int nbEmploye, LocalDate date, double taille, int nbAnneePartenariat){
         super(nom, nbEmploye, date);
         
         this.setTaille(taille);
@@ -100,13 +103,17 @@ class CommerceIndependant extends Commerce {
 		this.etatAnnee = etatAnnee;
 	}
 
+	public String getBonus(){ return getTaille()+""; }
+
+	public void setBonus(String x) { this.setTaille(Double.parseDouble(x)); }
+
 }
 
 class CommerceFranchise extends Commerce {
 
 	private String siret;
 
-    public CommerceFranchise(String nom, int nbEmploye, Date date, String siret){
+    public CommerceFranchise(String nom, int nbEmploye, LocalDate date, String siret){
     	super(nom, nbEmploye, date);
         this.setSiret(siret);
     }
@@ -118,5 +125,9 @@ class CommerceFranchise extends Commerce {
 	public void setSiret(String siret) {
 		this.siret = siret;
 	}
+
+	public String getBonus(){ return getSiret(); }
+
+	public void setBonus(String x) { this.setSiret(x); }
 
 }
