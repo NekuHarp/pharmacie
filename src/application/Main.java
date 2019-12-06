@@ -17,7 +17,7 @@ public class Main extends Application {
 			Parent root = loader.load();
 			Controller controller = loader.getController();
 
-			primaryStage.setTitle("Produits frais pour grossiste");
+			primaryStage.setTitle("Application qualitative pour Grossiste qualitatif");
 			primaryStage.setScene(new Scene(root, 800, 600));
 			primaryStage.setResizable(false);
 			primaryStage.show();

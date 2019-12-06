@@ -11,6 +11,7 @@ public class ProduitFlyweight {
 		for (int i = 0 ; i < this.produitCree.size() ; i++) {
 			if (produitCree.get(i).getNom() == nom) return produitCree.get(i);
 		}
+
 		return new Produit(nom, variete, prixInitial, datePeremption);
 	}
 	

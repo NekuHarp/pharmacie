@@ -106,7 +106,7 @@ public class Controller {
     @FXML
     private Label ReseauComLabel;
 
-    public Grossiste grossiste = new Grossiste();
+    private Grossiste grossiste = new Grossiste();
     private FadeTransition ft;
     private Commerce selectedcom;
     private Produit selecteditem;
@@ -122,10 +122,10 @@ public class Controller {
         ReseauBancaire testreseau = new Mastercard();
         CompteBancaire testcompte = new CompteClassique(testreseau);
         CompteBancaire testcompte2 = new CompteClient(testreseau);
-		CommerceFranchise Test = new CommerceFranchise("Test",25,LocalDate.of(1996, Month.DECEMBER, 30), testcompte,"s1r3tlol");
+		CommerceFranchise Test = new CommerceFranchise("Lidl",2500,LocalDate.of(1996, Month.DECEMBER, 30), testcompte,"siretoui420420");
         grossiste.listeCommerce.add(Test);
         LocalDate dateexemple = LocalDate.of(1998, Month.MAY, 31);
-        CommerceIndependant Test2 = new CommerceIndependant("Test2",450,dateexemple, testcompte2,1000, LocalDate.now().getYear()-dateexemple.getYear());
+        CommerceIndependant Test2 = new CommerceIndependant("Leclerc",4500,dateexemple, testcompte2,1000, LocalDate.now().getYear()-dateexemple.getYear());
         grossiste.listeCommerce.add(Test2);
 
         TypeComCombo.getItems().addAll("Indépendant","Franchisé");
@@ -449,12 +449,12 @@ public class Controller {
                 ComListview.getSelectionModel().clearSelection();
 
                 ft = new FadeTransition(Duration.millis(200), ComFormPane);
-                ft.setFromValue(1);
+                ft.setFromValue(0);
                 ft.setToValue(0);
                 ft.play();
                 ComFormPane.setDisable(true);
                 ft = new FadeTransition(Duration.millis(200), ItemListPane);
-                ft.setFromValue(1);
+                ft.setFromValue(0);
                 ft.setToValue(0);
                 ft.play();
                 ItemListPane.setDisable(true);
@@ -561,7 +561,7 @@ public class Controller {
                 ItemListview.getSelectionModel().clearSelection();
 
                 ft = new FadeTransition(Duration.millis(200), ItemFormPane);
-                ft.setFromValue(1);
+                ft.setFromValue(0);
                 ft.setToValue(0);
                 ft.play();
                 ItemFormPane.setDisable(true);
