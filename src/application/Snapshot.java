@@ -9,7 +9,7 @@ public class Snapshot {
 	private ObservableList<Commerce> listeCommerceSaved;
 	
 	public Snapshot(ObservableList<Commerce> listeCommerceSaved) {
-		System.out.println("Add " + listeCommerceSaved + "to log");
+		//System.out.println("Add " + listeCommerceSaved + " to log");
 		this.setListeCommerceSaved(listeCommerceSaved);
 	}
 

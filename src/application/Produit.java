@@ -1,16 +1,16 @@
 package application;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Produit {
 
     private String nom;
     private String variete;
     private double prixInitial;
-    private Date datePeremption;
+    private LocalDate datePeremption;
 
 
-	public Produit(String nom, String variete, double prixInitial, Date datePeremption){
+	public Produit(String nom, String variete, double prixInitial, LocalDate datePeremption){
 
         this.nom = nom;
         this.variete = variete;
@@ -43,11 +43,11 @@ public class Produit {
 		this.prixInitial = prixInitial;
 	}
 
-	public Date getDatePeremption() {
+	public LocalDate getDatePeremption() {
 		return datePeremption;
 	}
 
-	public void setDatePeremption(Date datePeremption) {
+	public void setDatePeremption(LocalDate datePeremption) {
 		this.datePeremption = datePeremption;
 	}
 

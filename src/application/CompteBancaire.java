@@ -3,9 +3,12 @@ package application;
 public abstract class CompteBancaire {
 
     private double montant;
+
+    private ReseauBancaire reseauBancaire;
     
-    public CompteBancaire() {
+    public CompteBancaire(ReseauBancaire reseauBancaire) {
 		this.montant = 0;
+		this.reseauBancaire = reseauBancaire;
 	}
     
     public CompteBancaire(double montant) {
@@ -22,39 +25,15 @@ public abstract class CompteBancaire {
 		this.montant = montant;
 	}
 
+	public ReseauBancaire getReseauBancaire() {
+		return reseauBancaire;
+	}
+
+	public void setReseauBancaire(ReseauBancaire reseauBancaire) {
+		this.reseauBancaire = reseauBancaire;
+	}
+
 }
 
-class CompteClient extends CompteBancaire {
-	private double montantDebiterfinMois = 0 ;
-	
-	
-	public double getMontantDebiterfinMois() {
-		return montantDebiterfinMois;
-	}
 
-	public void setMontantDebiterfinMois(double montantDebiterfinMois) {
-		this.montantDebiterfinMois = montantDebiterfinMois;
-	}
 
-	@Override
-	public void debiter(double somme) {
-		this.montantDebiterfinMois = this.montantDebiterfinMois + somme;
-	}
-	
-	@SuppressWarnings("unused")
-	private void finDeMois() {
-		this.setMontant(this.getMontant() - this.montantDebiterfinMois);
-		this.setMontantDebiterfinMois(0);
-	}
-	
-}
-
-class CompteClassique extends CompteBancaire {
-
-	@Override
-	public void debiter(double somme) {
-		this.setMontant(this.getMontant() - somme);
-		
-	}
-	
-}
