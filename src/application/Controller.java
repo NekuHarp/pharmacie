@@ -108,10 +108,8 @@ public class Controller {
 
     private Grossiste grossiste = new Grossiste();
     private FadeTransition ft;
-    private Commerce selectedcom;
+    private Pharmacie selectedcom;
     private Produit selecteditem;
-    private AllSnapShot snapshots = new AllSnapShot();
-    private Snapshot snap;
 
     public Controller() {
     }
@@ -121,12 +119,12 @@ public class Controller {
 
         ReseauBancaire testreseau = new Mastercard();
         CompteBancaire testcompte = new CompteClassique(testreseau);
-        CompteBancaire testcompte2 = new CompteClient(testreseau);
-		CommerceFranchise Test = new CommerceFranchise("Lidl",2500,LocalDate.of(1996, Month.DECEMBER, 30), testcompte,"siretoui420420");
-        grossiste.listeCommerce.add(Test);
+        CompteBancaire testcompte2 = new CompteFranchise(testreseau);
+		PharmacieFranchise Test = new PharmacieFranchise("Lidl",2500, testcompte,"siretoui420420");
+        grossiste.listePharmacie.add(Test);
         LocalDate dateexemple = LocalDate.of(1998, Month.MAY, 31);
-        CommerceIndependant Test2 = new CommerceIndependant("Leclerc",4500,dateexemple, testcompte2,1000, LocalDate.now().getYear()-dateexemple.getYear());
-        grossiste.listeCommerce.add(Test2);
+        PharmacieIndependante Test2 = new PharmacieIndependante("Leclerc",4500, testcompte2,"siretnon42069");
+        grossiste.listePharmacie.add(Test2);
 
         TypeComCombo.getItems().addAll("Indépendant","Franchisé");
         CompteComCombo.getItems().addAll("Classique","Client");
@@ -135,11 +133,11 @@ public class Controller {
         CompteComCombo.getSelectionModel().selectFirst();
         ReseauComCombo.getSelectionModel().selectFirst();
 
-        ComListview.setItems(grossiste.listeCommerce);
+        ComListview.setItems(grossiste.listePharmacie);
 
-        ComListview.setCellFactory(param -> new ListCell<Commerce>() {
+        ComListview.setCellFactory(param -> new ListCell<Pharmacie>() {
             @Override
-            protected void updateItem(Commerce p, boolean empty){
+            protected void updateItem(Pharmacie p, boolean empty){
                 super.updateItem(p, empty);
                 if(empty || p == null || p.getNom() == null){
                     setText("");
@@ -163,9 +161,9 @@ public class Controller {
             }
         });
 
-        ComListview.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Commerce>() {
+        ComListview.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Pharmacie>() {
             @Override
-            public void changed(ObservableValue<? extends Commerce> observable, Commerce oldValue, Commerce newValue) {
+            public void changed(ObservableValue<? extends Pharmacie> observable, Pharmacie oldValue, Pharmacie newValue) {
 
                 try {
                     ft = new FadeTransition(Duration.millis(200), ComFormPane);
@@ -233,8 +231,6 @@ public class Controller {
 
                     NameComField.setText(newValue.getNom());
                     NbrEmpComField.setText(newValue.getNbEmploye()+"");
-                    DateComPicker.setValue(newValue.getDatePartenariat());
-                    BonusComField.setText(newValue.getBonus());
                     ItemListview.setItems(selectedcom.getListeProduit());
                 } catch(Exception ex) {
 
@@ -287,18 +283,15 @@ public class Controller {
             @Override
             public void handle(ActionEvent e) {
 
-                Commerce temp = selectedcom;
+                Pharmacie temp = selectedcom;
 
                 temp.setNom(NameComField.getText());
                 temp.setNbEmploye(Integer.parseInt(NbrEmpComField.getText()));
-                temp.setDatePartenariat(DateComPicker.getValue());
-                temp.setBonus(BonusComField.getText());
+                temp.setSiret(BonusComField.getText());
 
-                snap = new Snapshot(grossiste.listeCommerce);
-                snapshots.addSnapshot(snap);
 
-                grossiste.listeCommerce.remove(selectedcom);
-                grossiste.listeCommerce.add(temp);
+                grossiste.listePharmacie.remove(selectedcom);
+                grossiste.listePharmacie.add(temp);
                 ComListview.getSelectionModel().clearSelection();
 
                 ft = new FadeTransition(Duration.millis(200), ComFormPane);
@@ -333,18 +326,16 @@ public class Controller {
                 if(CompteComCombo.getValue().equals("Classique")){
                     compte = new CompteClassique(reseau);
                 } else {
-                    compte = new CompteClient(reseau);
+                    compte = new CompteFranchise(reseau);
                 }
 
-                snap = new Snapshot(grossiste.listeCommerce);
-                snapshots.addSnapshot(snap);
 
                 if(TypeComCombo.getValue().equals("Indépendant")){
-                    CommerceIndependant x = new CommerceIndependant(NameComField.getText(),Integer.parseInt(NbrEmpComField.getText()),DateComPicker.getValue(),compte,Double.parseDouble(BonusComField.getText()),LocalDate.now().getYear()-DateComPicker.getValue().getYear());
-                    grossiste.listeCommerce.add(x);
+                    PharmacieIndependante x = new PharmacieIndependante(NameComField.getText(),Integer.parseInt(NbrEmpComField.getText()),compte,BonusComField.getText());
+                    grossiste.listePharmacie.add(x);
                 } else {
-                    CommerceFranchise x = new CommerceFranchise(NameComField.getText(),Integer.parseInt(NbrEmpComField.getText()),DateComPicker.getValue(),compte,BonusComField.getText());
-                    grossiste.listeCommerce.add(x);
+                    PharmacieFranchise x = new PharmacieFranchise(NameComField.getText(),Integer.parseInt(NbrEmpComField.getText()),compte,BonusComField.getText());
+                    grossiste.listePharmacie.add(x);
                 }
 
                 ft = new FadeTransition(Duration.millis(200), ComFormPane);
@@ -442,10 +433,8 @@ public class Controller {
             @Override
             public void handle(ActionEvent e) {
 
-                snap = new Snapshot(grossiste.listeCommerce);
-                snapshots.addSnapshot(snap);
 
-                grossiste.listeCommerce.remove(selectedcom);
+                grossiste.listePharmacie.remove(selectedcom);
                 ComListview.getSelectionModel().clearSelection();
 
                 ft = new FadeTransition(Duration.millis(200), ComFormPane);
@@ -477,9 +466,6 @@ public class Controller {
                 temp.setVariete(VarItemField.getText());
                 temp.setPrixInitial(Double.parseDouble(PrixItemField.getText()));
 
-                snap = new Snapshot(grossiste.listeCommerce);
-                snapshots.addSnapshot(snap);
-
                 selectedcom.getListeProduit().remove(selecteditem);
                 selectedcom.getListeProduit().add(temp);
                 ItemListview.getSelectionModel().clearSelection();
@@ -499,8 +485,6 @@ public class Controller {
             @Override
             public void handle(ActionEvent e) {
 
-                snap = new Snapshot(grossiste.listeCommerce);
-                snapshots.addSnapshot(snap);
 
                 for(int i = 0; i<Integer.parseInt(NbrItemField.getText());i++){
 
@@ -554,8 +538,6 @@ public class Controller {
             @Override
             public void handle(ActionEvent e) {
 
-                snap = new Snapshot(grossiste.listeCommerce);
-                snapshots.addSnapshot(snap);
 
                 selectedcom.getListeProduit().remove(selecteditem);
                 ItemListview.getSelectionModel().clearSelection();
@@ -566,93 +548,6 @@ public class Controller {
                 ft.play();
                 ItemFormPane.setDisable(true);
 
-            }
-        });
-
-        CancelBtn.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent e) {
-
-                if(!snapshots.getSnapshotHistory().isEmpty()) {
-
-                    /*ComListview.getSelectionModel().clearSelection();
-                    ItemListview.getSelectionModel().clearSelection();
-
-                    ft = new FadeTransition(Duration.millis(200), ComFormPane);
-                    ft.setFromValue(0);
-                    ft.setToValue(0);
-                    ft.play();
-                    ComFormPane.setDisable(true);
-                    ft = new FadeTransition(Duration.millis(200), ValComBtn);
-                    ft.setFromValue(0);
-                    ft.setToValue(0);
-                    ft.play();
-                    ValComBtn.setDisable(true);
-                    ft = new FadeTransition(Duration.millis(200), AddComBtn);
-                    ft.setFromValue(0);
-                    ft.setToValue(0);
-                    ft.play();
-                    AddComBtn.setDisable(true);
-                    ft = new FadeTransition(Duration.millis(200), ItemListPane);
-                    ft.setFromValue(0);
-                    ft.setToValue(0);
-                    ft.play();
-                    ItemListPane.setDisable(true);
-                    ft = new FadeTransition(Duration.millis(200), ItemFormPane);
-                    ft.setFromValue(0);
-                    ft.setToValue(0);
-                    ft.play();
-                    ItemFormPane.setDisable(true);
-                    ft = new FadeTransition(Duration.millis(200), TypeComLabel);
-                    ft.setFromValue(0);
-                    ft.setToValue(0);
-                    ft.play();
-                    TypeComLabel.setDisable(true);
-                    ft = new FadeTransition(Duration.millis(200), TypeComCombo);
-                    ft.setFromValue(0);
-                    ft.setToValue(0);
-                    ft.play();
-                    TypeComCombo.setDisable(true);
-                    ft = new FadeTransition(Duration.millis(200), NumComLabel);
-                    ft.setFromValue(0);
-                    ft.setToValue(0);
-                    ft.play();
-                    NumComLabel.setDisable(true);
-                    ft = new FadeTransition(Duration.millis(200), CompteComField);
-                    ft.setFromValue(0);
-                    ft.setToValue(0);
-                    ft.play();
-                    CompteComField.setDisable(true);
-                    ft = new FadeTransition(Duration.millis(200), CompteComLabel);
-                    ft.setFromValue(0);
-                    ft.setToValue(0);
-                    ft.play();
-                    CompteComLabel.setDisable(true);
-                    ft = new FadeTransition(Duration.millis(200), ReseauComLabel);
-                    ft.setFromValue(0);
-                    ft.setToValue(1);
-                    ft.play();
-                    ReseauComLabel.setDisable(true);
-                    ft = new FadeTransition(Duration.millis(200), CompteComCombo);
-                    ft.setFromValue(0);
-                    ft.setToValue(0);
-                    ft.play();
-                    CompteComCombo.setDisable(false);
-                    ft = new FadeTransition(Duration.millis(200), ReseauComCombo);
-                    ft.setFromValue(0);
-                    ft.setToValue(0);
-                    ft.play();
-                    ReseauComCombo.setDisable(true);
-
-                    grossiste.listeCommerce = snapshots.goBack().getListeCommerceSaved();
-                    ComListview.refresh();
-                    ItemListview.refresh();*/
-
-                    snapshots.goBack();
-
-                } else {
-                    System.out.println("Pas de snapshot précédent");
-                }
             }
         });
 

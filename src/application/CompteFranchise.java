@@ -1,9 +1,9 @@
 package application;
 
-class CompteClient extends CompteBancaire {
+class CompteFranchise extends CompteBancaire {
     private double montantDebiterfinMois = 0 ;
 
-    public CompteClient(ReseauBancaire reseauBancaire){
+    public CompteFranchise(ReseauBancaire reseauBancaire){
         super(reseauBancaire);
     }
 

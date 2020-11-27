@@ -3,31 +3,22 @@ package application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.time.LocalDate;
-
-public abstract class Commerce {
+public abstract class Pharmacie {
 
     private String nom;
     private int nbEmploye;
     private ObservableList<Produit> listeProduit;
-    private LocalDate datePartenariat;
+	private ObservableList<Employe> listeEmploye;
     private CompteBancaire compte;
+    private String siret;
 
-    public Commerce(String nom, int nbEmploye, LocalDate date, CompteBancaire compte){
+    public Pharmacie(String nom, int nbEmploye, CompteBancaire compte, String siret){
     	this.setNom(nom);
         this.setNbEmploye(nbEmploye);
-        this.setDatePartenariat(date);
         this.setCompte(compte);
         this.setListeProduit(FXCollections.observableArrayList());
+		this.setSiret(siret);
     }
-
-	public LocalDate getDatePartenariat() {
-		return datePartenariat;
-	}
-
-	public void setDatePartenariat(LocalDate datePartenariat) {
-		this.datePartenariat = datePartenariat;
-	}
 
 	public int getNbEmploye() {
 		return nbEmploye;
@@ -61,8 +52,19 @@ public abstract class Commerce {
 		this.listeProduit = listeProduit;
 	}
 
-	public abstract String getBonus();
+	public ObservableList<Employe> getListeEmploye() {
+		return listeEmploye;
+	}
 
-    public abstract void setBonus(String x);
+	public void setListeEmploye(ObservableList<Employe> listeEmploye) {
+		this.listeEmploye = listeEmploye;
+	}
 
+	public String getSiret() {
+		return siret;
+	}
+
+	public void setSiret(String siret) {
+		this.siret = siret;
+	}
 }
