@@ -106,7 +106,7 @@ public class Controller {
     @FXML
     private Label ReseauComLabel;
 
-    private Grossiste grossiste = new Grossiste();
+    private PharmacienManager pharmacienManager = new PharmacienManager("Bonbeurre", "Jean", "35 Rue du pique-nique", 9001);
     private FadeTransition ft;
     private Pharmacie selectedcom;
     private Produit selecteditem;
@@ -121,10 +121,10 @@ public class Controller {
         CompteBancaire testcompte = new CompteClassique(testreseau);
         CompteBancaire testcompte2 = new CompteFranchise(testreseau);
 		PharmacieFranchise Test = new PharmacieFranchise("Lidl",2500, testcompte,"siretoui420420");
-        grossiste.listePharmacie.add(Test);
+        pharmacienManager.listePharmacie.add(Test);
         LocalDate dateexemple = LocalDate.of(1998, Month.MAY, 31);
         PharmacieIndependante Test2 = new PharmacieIndependante("Leclerc",4500, testcompte2,"siretnon42069");
-        grossiste.listePharmacie.add(Test2);
+        pharmacienManager.listePharmacie.add(Test2);
 
         TypeComCombo.getItems().addAll("Indépendant","Franchisé");
         CompteComCombo.getItems().addAll("Classique","Client");
@@ -133,7 +133,7 @@ public class Controller {
         CompteComCombo.getSelectionModel().selectFirst();
         ReseauComCombo.getSelectionModel().selectFirst();
 
-        ComListview.setItems(grossiste.listePharmacie);
+        ComListview.setItems(pharmacienManager.listePharmacie);
 
         ComListview.setCellFactory(param -> new ListCell<Pharmacie>() {
             @Override
@@ -290,8 +290,8 @@ public class Controller {
                 temp.setSiret(BonusComField.getText());
 
 
-                grossiste.listePharmacie.remove(selectedcom);
-                grossiste.listePharmacie.add(temp);
+                pharmacienManager.listePharmacie.remove(selectedcom);
+                pharmacienManager.listePharmacie.add(temp);
                 ComListview.getSelectionModel().clearSelection();
 
                 ft = new FadeTransition(Duration.millis(200), ComFormPane);
@@ -332,10 +332,10 @@ public class Controller {
 
                 if(TypeComCombo.getValue().equals("Indépendant")){
                     PharmacieIndependante x = new PharmacieIndependante(NameComField.getText(),Integer.parseInt(NbrEmpComField.getText()),compte,BonusComField.getText());
-                    grossiste.listePharmacie.add(x);
+                    pharmacienManager.listePharmacie.add(x);
                 } else {
                     PharmacieFranchise x = new PharmacieFranchise(NameComField.getText(),Integer.parseInt(NbrEmpComField.getText()),compte,BonusComField.getText());
-                    grossiste.listePharmacie.add(x);
+                    pharmacienManager.listePharmacie.add(x);
                 }
 
                 ft = new FadeTransition(Duration.millis(200), ComFormPane);
@@ -434,7 +434,7 @@ public class Controller {
             public void handle(ActionEvent e) {
 
 
-                grossiste.listePharmacie.remove(selectedcom);
+                pharmacienManager.listePharmacie.remove(selectedcom);
                 ComListview.getSelectionModel().clearSelection();
 
                 ft = new FadeTransition(Duration.millis(200), ComFormPane);

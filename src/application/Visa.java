@@ -10,22 +10,25 @@ class Visa implements ReseauBancaire{
 
     @Override
     public double calculTransaction(double montant) {
+        return montant - montant*0.0025;
+    }
 
+    @Override
+    public double calculRemboursement(double montant){
         switch (this.pays.getNom()) {
             case "France":
-                return montant - montant*0 - montant*0.0025;
+                return montant - montant*0;
             case "Espagne":
-                return montant - montant*0.001 - montant*0.0025;
+                return montant - montant*0.001;
             case "Etats-Unis":
-                return montant - montant*0.002 - montant*0.0025;
+                return montant - montant*0.002;
             case "Portugal":
-                return montant - montant*0.0015 - montant*0.0025;
+                return montant - montant*0.0015;
             case "Royaume-Uni":
-                return montant - montant*0.0025 - montant*0.0025;
+                return montant - montant*0.0025;
             default:
-                return montant - montant*0.003 - montant*0.0025;
+                return montant - montant*0.003;
         }
-
     }
 
     public Pays getPays() {

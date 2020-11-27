@@ -7,4 +7,9 @@ class Mastercard implements ReseauBancaire {
         return montant - montant*0.005;
     }
 
+    @Override
+    public double calculRemboursement(double montant){
+        return montant;
+    }
+
 }

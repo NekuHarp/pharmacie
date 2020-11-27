@@ -3,16 +3,15 @@ package application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-public class Grossiste {
+public class PharmacienManager extends Pharmacien {
 
-    public ObservableList<Produit> listeProduit;
     public ObservableList<Pharmacie> listePharmacie;
-    public Grossiste instance;
+    public PharmacienManager instance;
 
-    public Grossiste(){
+    public PharmacienManager(String nom, String prenom, String adresse, double sal) {
+        super(nom, prenom, adresse, sal);
+        this.setVentesTotal(0);
         instance = this;
         listePharmacie = FXCollections.observableArrayList();
-        listeProduit = FXCollections.observableArrayList();
     }
-
 }
