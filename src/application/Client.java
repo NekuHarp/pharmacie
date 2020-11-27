@@ -10,4 +10,9 @@ public class Client extends Personne {
         super(nom, prenom, adresse);
     }
 
+    public boolean acheter(Produit produit, CarteBancaire carte){
+        // TODO : Rafraîchir l'interface pour le pattern Observer
+        return carte.paiement(produit.getPrixVente());
+    }
+
 }

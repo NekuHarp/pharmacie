@@ -21,9 +21,8 @@ class PharmacieFranchise extends Pharmacie {
 
     private PharmacieFranchise pharMere;
 
-    public PharmacieFranchise(String nom, int nbEmploye, CompteBancaire compte, String siret){
-        super(nom, nbEmploye, compte, siret);
-
+    public PharmacieFranchise(String nom, int nbEmploye, CompteBancaire compte, double taille, String siret){
+        super(nom, nbEmploye, compte, taille, siret);
         this.setNbrDependante(0);
         this.setDependante(false);
     }
@@ -66,5 +65,38 @@ class PharmacieFranchise extends Pharmacie {
 
     public void setPharMere(PharmacieFranchise pharMere) {
         this.pharMere = pharMere;
+    }
+
+    public double calcFranchise(double somme){
+        int x = pharMere.getNbrDependante();
+        if(x>10){
+            return somme - somme*0.0075;
+        } else if (x>4) {
+            return somme - somme*0.005;
+        } else if (x>1) {
+            return somme - somme*0.0025;
+        } else {
+            return somme;
+        }
+    }
+
+    public void reversementCA(){
+        double temp = this.getChiffreAffaires();
+        int x = pharMere.getNbrDependante();
+        if(x>10){
+            pharMere.setChiffreAffaires(pharMere.getChiffreAffaires()+(temp*0.003));
+        } else if (x>4) {
+            pharMere.setChiffreAffaires(pharMere.getChiffreAffaires()+(temp*0.002));
+        } else if (x>1) {
+            pharMere.setChiffreAffaires(pharMere.getChiffreAffaires()+(temp*0.001));
+        }
+    }
+
+    public void acheterProduit(Produit produit){
+        double temp = calcFranchise(produit.getPrixAchat());
+        if(this.getCompte().getMontant()>=temp){
+            this.getListeProduit().add(produit);
+            this.getCompte().debiter(temp);
+        }
     }
 }

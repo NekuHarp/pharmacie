@@ -5,16 +5,18 @@ import java.time.LocalDate;
 public class Produit {
 
     private String nom;
-    private String variete;
-    private double prixInitial;
+    private String type;
+    private double prixAchat;
+	private double prixVente;
     private LocalDate datePeremption;
 
 
-	public Produit(String nom, String variete, double prixInitial, LocalDate datePeremption){
+	public Produit(String nom, String type, double prixA, double prixV, LocalDate datePeremption){
 
         this.nom = nom;
-        this.variete = variete;
-        this.prixInitial = prixInitial;
+        this.type = type;
+        this.prixAchat = prixA;
+		this.prixVente = prixA;
         this.datePeremption = datePeremption;
 
     }
@@ -27,20 +29,28 @@ public class Produit {
 		this.nom = nom;
 	}
 
-	public String getVariete() {
-		return variete;
+	public String getType() {
+		return type;
 	}
 
-	public void setVariete(String variete) {
-		this.variete = variete;
+	public void setType(String type) {
+		this.type = type;
 	}
 
-	public double getPrixInitial() {
-		return prixInitial;
+	public double getPrixAchat() {
+		return prixAchat;
 	}
 
-	public void setPrixInitial(double prixInitial) {
-		this.prixInitial = prixInitial;
+	public void setPrixAchat(double prixAchat) {
+		this.prixAchat = prixAchat;
+	}
+
+	public double getPrixVente() {
+		return prixVente;
+	}
+
+	public void setPrixVente(double prixVente) {
+		this.prixVente = prixVente;
 	}
 
 	public LocalDate getDatePeremption() {

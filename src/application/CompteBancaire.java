@@ -14,6 +14,10 @@ public abstract class CompteBancaire {
     
     public abstract void debiter(double somme);
 
+    public void ajoutargent(double somme){
+    	montant += somme;
+	}
+
 	public double getMontant() {
 		return montant;
 	}

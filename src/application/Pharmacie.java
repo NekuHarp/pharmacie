@@ -10,14 +10,18 @@ public abstract class Pharmacie {
     private ObservableList<Produit> listeProduit;
 	private ObservableList<Employe> listeEmploye;
     private CompteBancaire compte;
+    private double taille;
     private String siret;
+    private double chiffreAffaires;
 
-    public Pharmacie(String nom, int nbEmploye, CompteBancaire compte, String siret){
+    public Pharmacie(String nom, int nbEmploye, CompteBancaire compte, double taille, String siret){
     	this.setNom(nom);
         this.setNbEmploye(nbEmploye);
         this.setCompte(compte);
         this.setListeProduit(FXCollections.observableArrayList());
+        this.setTaille(taille);
 		this.setSiret(siret);
+		this.chiffreAffaires = 0;
     }
 
 	public int getNbEmploye() {
@@ -60,11 +64,58 @@ public abstract class Pharmacie {
 		this.listeEmploye = listeEmploye;
 	}
 
+	public double getTaille() {
+		return taille;
+	}
+
+	public void setTaille(double taille) {
+		this.taille = taille;
+	}
+
 	public String getSiret() {
 		return siret;
 	}
 
 	public void setSiret(String siret) {
 		this.siret = siret;
+	}
+
+	public double getChiffreAffaires() {
+		return chiffreAffaires;
+	}
+
+	public void setChiffreAffaires(double chiffreAffaires) {
+		this.chiffreAffaires = chiffreAffaires;
+	}
+
+	public boolean canPayEmployees(){
+    	double temp = 0;
+		for (int i = 0; i < listeEmploye.size(); i++) {
+			temp += listeEmploye.get(i).calcSalaire();
+		}
+		if(temp>compte.getMontant()){
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	public void payEmployees(){
+    	if(canPayEmployees()){
+			double temp = 0;
+			for (int i = 0; i < listeEmploye.size(); i++) {
+				temp += listeEmploye.get(i).calcSalaire();
+			}
+			compte.debiter(temp);
+		}
+	}
+
+	public abstract void acheterProduit(Produit produit);
+
+	public void vendreProduit(Produit produit){
+		if(listeProduit.contains(produit)){
+			listeProduit.remove(produit);
+			compte.ajoutargent(produit.getPrixVente());
+		}
 	}
 }
