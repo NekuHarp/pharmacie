@@ -117,13 +117,17 @@ public class Controller {
     @FXML
     private void initialize() {
 
+        // TODO : remplacer date de création pharmacie par taille
+        // TODO : afficher compte de la pharma
+        // TODO : gestion de client -> achat produit
+
         ReseauBancaire testreseau = new Mastercard();
         CompteBancaire testcompte = new CompteClassique(testreseau);
         CompteBancaire testcompte2 = new CompteFranchise(testreseau);
-		Pharmacie Test = new PharmacieFranchise("Lidl",2500, testcompte, 30,"siretoui420420");
+		Pharmacie Test = new PharmacieFranchise("la croix verte",2500, testcompte, 30,"siretoui420420");
         pharmacienManager.listePharmacie.add(Test);
         LocalDate dateexemple = LocalDate.of(1998, Month.MAY, 31);
-        Pharmacie Test2 = new PharmacieIndependante("Leclerc",4500, testcompte2, 50,"siretnon42069");
+        Pharmacie Test2 = new PharmacieIndependante("Leclerc Pharma",4500, testcompte2, 50,"siretnon42069");
         pharmacienManager.listePharmacie.add(Test2);
 
         TypeComCombo.getItems().addAll("Indépendant","Franchisé");
