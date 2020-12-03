@@ -120,10 +120,10 @@ public class Controller {
         ReseauBancaire testreseau = new Mastercard();
         CompteBancaire testcompte = new CompteClassique(testreseau);
         CompteBancaire testcompte2 = new CompteFranchise(testreseau);
-		PharmacieFranchise Test = new PharmacieFranchise("Lidl",2500, testcompte,"siretoui420420");
+		Pharmacie Test = new PharmacieFranchise("Lidl",2500, testcompte, 30,"siretoui420420");
         pharmacienManager.listePharmacie.add(Test);
         LocalDate dateexemple = LocalDate.of(1998, Month.MAY, 31);
-        PharmacieIndependante Test2 = new PharmacieIndependante("Leclerc",4500, testcompte2,"siretnon42069");
+        Pharmacie Test2 = new PharmacieIndependante("Leclerc",4500, testcompte2, 50,"siretnon42069");
         pharmacienManager.listePharmacie.add(Test2);
 
         TypeComCombo.getItems().addAll("Indépendant","Franchisé");
@@ -156,7 +156,7 @@ public class Controller {
                     setText("");
                 }
                 else{
-                    setText(p.getNom()+" "+p.getVariete());
+                    setText(p.getNom()+" "+p.getType());
                 }
             }
         });
@@ -269,9 +269,9 @@ public class Controller {
                     NameItemField.setText(newValue.getNom());
                     NbrItemField.setDisable(true);
                     NbrItemField.setText("1");
-                    VarItemField.setText(newValue.getVariete());
+                    VarItemField.setText(newValue.getType());
                     DateComPicker.setValue(newValue.getDatePeremption());
-                    PrixItemField.setText(newValue.getPrixInitial()+"");
+                    PrixItemField.setText(newValue.getPrixAchat()+""); // pris initial = prix achat non ?
                 } catch(Exception ex) {
 
                 }
@@ -331,10 +331,10 @@ public class Controller {
 
 
                 if(TypeComCombo.getValue().equals("Indépendant")){
-                    PharmacieIndependante x = new PharmacieIndependante(NameComField.getText(),Integer.parseInt(NbrEmpComField.getText()),compte,BonusComField.getText());
+                    Pharmacie x = new PharmacieIndependante(NameComField.getText(),Integer.parseInt(NbrEmpComField.getText()),compte, /*Integer.parseInt(TaillePharma.getText())*/ 20,BonusComField.getText());
                     pharmacienManager.listePharmacie.add(x);
                 } else {
-                    PharmacieFranchise x = new PharmacieFranchise(NameComField.getText(),Integer.parseInt(NbrEmpComField.getText()),compte,BonusComField.getText());
+                    Pharmacie x = new PharmacieFranchise(NameComField.getText(),Integer.parseInt(NbrEmpComField.getText()),compte, /*Integer.parseInt(TaillePharma.getText())*/ 20,BonusComField.getText());
                     pharmacienManager.listePharmacie.add(x);
                 }
 
@@ -463,8 +463,8 @@ public class Controller {
 
                 temp.setNom(NameItemField.getText());
                 temp.setDatePeremption(DateComPicker.getValue());
-                temp.setVariete(VarItemField.getText());
-                temp.setPrixInitial(Double.parseDouble(PrixItemField.getText()));
+                temp.setType(VarItemField.getText());
+                temp.setPrixAchat(Double.parseDouble(PrixItemField.getText())); // prix achat = prix initial non ?
 
                 selectedcom.getListeProduit().remove(selecteditem);
                 selectedcom.getListeProduit().add(temp);
@@ -487,8 +487,8 @@ public class Controller {
 
 
                 for(int i = 0; i<Integer.parseInt(NbrItemField.getText());i++){
-
-                    Produit temp = new Produit(NameItemField.getText(),VarItemField.getText(),Double.parseDouble(PrixItemField.getText()),DateComPicker.getValue());
+                    // TODO : ici prix achat = prix de vente -> à modifier
+                    Produit temp = new Produit(NameItemField.getText(),VarItemField.getText(),Double.parseDouble(PrixItemField.getText()), Double.parseDouble(PrixItemField.getText()),DateComPicker.getValue());
                     selectedcom.getListeProduit().add(temp);
                     selectedcom.getCompte().debiter(Double.parseDouble(PrixItemField.getText()));
 
