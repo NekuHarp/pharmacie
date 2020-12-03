@@ -41,6 +41,6 @@ public class Preparateur extends Employe {
     }
 
     public double calcSalaire(){
-        return 0;
+        return coutHeures*nbrHeures+anciennete.calculBonus(coutHeures*nbrHeures);
     }
 }
