@@ -4,8 +4,8 @@ class PharmacieIndependante extends Pharmacie {
 
     private String siret;
 
-    public PharmacieIndependante(String nom, int nbEmploye, CompteBancaire compte, double taille, String siret){
-        super(nom, nbEmploye, compte, taille, siret);
+    public PharmacieIndependante(String nom, CompteBancaire compte, double taille, String siret){
+        super(nom, compte, taille, siret);
     }
 
     public String getSiret() {
@@ -16,10 +16,13 @@ class PharmacieIndependante extends Pharmacie {
         this.siret = siret;
     }
 
-    public void acheterProduit(Produit produit){
+    public boolean acheterProduit(Produit produit){
         if(this.getCompte().getMontant()>=produit.getPrixAchat()){
             this.getListeProduit().add(produit);
             this.getCompte().debiter(produit.getPrixAchat());
+            return true;
+        } else {
+            return false;
         }
     }
 

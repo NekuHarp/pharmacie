@@ -5,7 +5,7 @@ public abstract class CompteBancaire {
     private double montant;
     
     public CompteBancaire(ReseauBancaire reseauBancaire) {
-		this.montant = 0;
+		this.montant = 10000;
 	}
     
     public CompteBancaire(double montant) {
