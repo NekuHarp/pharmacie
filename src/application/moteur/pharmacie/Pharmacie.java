@@ -22,6 +22,7 @@ public abstract class Pharmacie {
         this.setNbEmploye(1);
         this.setCompte(compte);
         this.setListeProduit(FXCollections.observableArrayList());
+		this.setListeEmploye(FXCollections.observableArrayList());
         this.setTaille(taille);
 		this.setSiret(siret);
 		this.chiffreAffaires = 0;

@@ -1,6 +1,5 @@
-package application.moteur;
-	
-import application.vue.Controller;
+package application.vue;
+
 import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.stage.Stage;
@@ -18,7 +17,7 @@ public class Main extends Application {
 			Parent root = loader.load();
 			Controller controller = loader.getController();
 
-			primaryStage.setTitle("Application qualitative pour Grossiste qualitatif");
+			primaryStage.setTitle("Gestion de pharmacies");
 			primaryStage.setScene(new Scene(root, 800, 600));
 			primaryStage.setResizable(false);
 			primaryStage.show();
