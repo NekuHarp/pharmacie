@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerMenu">
+   <children>
+      <Button fx:id="gestionPharma" layoutX="135.0" layoutY="180.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="511.0" text="Gestion achat pharmacie">
+         <font>
+            <Font name="Gill Sans Nova Cond XBd" size="35.0" />
+         </font></Button>
+      <Button fx:id="gestionEmployes" layoutX="135.0" layoutY="300.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="511.0" text="Gestion employés pharmacie">
+         <font>
+            <Font name="Gill Sans Nova Cond XBd" size="35.0" />
+         </font>
+      </Button>
+      <Button fx:id="gestionAchat" layoutX="135.0" layoutY="426.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="511.0" text="Gestion achats clients">
+         <font>
+            <Font name="Gill Sans Nova Cond XBd" size="35.0" />
+         </font>
+      </Button>
+      <Label layoutX="82.0" layoutY="54.0" text="Menu Gestion de pharmacie">
+         <font>
+            <Font name="Gill Sans Nova Cond XBd" size="58.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Controller">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerGestionEmploye">
    <children>
       <GridPane gridLinesVisible="true" prefHeight="600.0" prefWidth="800.0">
         <columnConstraints>
@@ -110,49 +110,104 @@
                </children></Pane>
             <Pane fx:id="ItemFormPane" disable="true" layoutX="10.0" layoutY="310.0" opacity="0.0" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>
-                  <Button fx:id="ValItemBtn" layoutX="16.0" layoutY="256.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="368.0" text="Valider">
-                     <font>
-                        <Font name="Gill Sans Nova Cond XBd" size="20.0" />
-                     </font></Button>
                   <Label layoutX="14.0" layoutY="14.0" text="Nom">
                      <font>
                         <Font name="Gill Sans Nova Cond XBd" size="18.0" />
                      </font></Label>
-                  <TextField fx:id="NameItemField" layoutX="62.0" layoutY="9.0" prefHeight="31.0" prefWidth="324.0" promptText="Nom du produit" />
-                  <TextField fx:id="NbrItemField" layoutX="142.0" layoutY="206.0" prefHeight="31.0" prefWidth="243.0" promptText="Nombre de produit voulu">
+                  <TextField fx:id="nomEmployeTextField" layoutX="62.0" layoutY="10.0" prefHeight="31.0" prefWidth="324.0" promptText="Nom de l'employé">
                      <font>
-                        <Font name="Gill Sans Nova Light" size="15.0" />
-                     </font></TextField>
-                  <Label fx:id="nbProduitLabel" layoutX="11.0" layoutY="210.0" text="Nombre produits">
-                     <font>
-                        <Font name="Gill Sans Nova Cond XBd" size="18.0" />
-                     </font></Label>
-                  <TextField fx:id="VarItemField" layoutX="142.0" layoutY="110.0" prefHeight="31.0" prefWidth="243.0" promptText="Variété">
-                     <font>
-                        <Font name="Gill Sans Nova Light" size="15.0" />
-                     </font></TextField>
-                  <Label fx:id="varieteLabel" layoutX="47.0" layoutY="114.0" text="Variété">
-                     <font>
-                        <Font name="Gill Sans Nova Cond XBd" size="18.0" />
-                     </font></Label>
-                  <Label fx:id="datePeremptionLabel" layoutX="11.0" layoutY="62.0" text="Date Péremption">
-                     <font>
-                        <Font name="Gill Sans Nova Cond XBd" size="18.0" />
-                     </font></Label>
-                  <DatePicker fx:id="DateItemPicker" layoutX="143.0" layoutY="58.0" prefHeight="31.0" prefWidth="243.0" />
-                  <Label fx:id="prixLabel" layoutX="58.0" layoutY="163.0" text="Prix">
-                     <font>
-                        <Font name="Gill Sans Nova Cond XBd" size="18.0" />
-                     </font></Label>
-                  <TextField fx:id="PrixItemField" layoutX="143.0" layoutY="159.0" prefHeight="31.0" prefWidth="114.0" promptText="Prix d'achat">
-                     <font>
-                        <Font name="Gill Sans Nova Light" size="15.0" />
-                     </font></TextField>
-                  <Button fx:id="AddItemBtn" layoutX="16.0" layoutY="256.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="368.0" text="Ajouter">
+                        <Font name="Gill Sans Nova Light" size="16.0" />
+                     </font>
+                  </TextField>
+                  <Button fx:id="valideEtAjoutEmployeBouton" layoutX="16.0" layoutY="256.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="368.0" text="Ajouter">
                      <font>
                         <Font name="Gill Sans Nova Cond XBd" size="20.0" />
-                     </font></Button>
-                  <TextField fx:id="prixVenteTextField" layoutX="272.0" layoutY="160.0" prefHeight="31.0" prefWidth="114.0" promptText="Prix de vente">
+                     </font>
+                  </Button>
+                  <Label fx:id="prenomLabel" layoutX="44.0" layoutY="62.0" text="Prénom">
+                     <font>
+                        <Font name="Gill Sans Nova Cond XBd" size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="prenomEmployeTextField" layoutX="143.0" layoutY="57.0" prefHeight="33.0" prefWidth="243.0" promptText="Prénom de l'employé">
+                     <font>
+                        <Font name="Gill Sans Nova Light" size="16.0" />
+                     </font>
+                  </TextField>
+                  <Label fx:id="adresseLabel" layoutX="47.0" layoutY="114.0" prefHeight="24.0" prefWidth="66.0" text="Adresse">
+                     <font>
+                        <Font name="Gill Sans Nova Cond XBd" size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="adresseTextField" layoutX="142.0" layoutY="110.0" prefHeight="31.0" prefWidth="243.0" promptText="Adresse de l'employé">
+                     <font>
+                        <Font name="Gill Sans Nova Light" size="15.0" />
+                     </font>
+                  </TextField>
+                  <Label fx:id="typeEmploieLabel" layoutX="8.0" layoutY="163.0" text="Employé comme :">
+                     <font>
+                        <Font name="Gill Sans Nova Cond XBd" size="18.0" />
+                     </font>
+                  </Label>
+                  <ToggleButton fx:id="typeEmploiePharma" layoutX="143.0" layoutY="159.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="124.0" selected="true" text="Pharmacien">
+                     <font>
+                        <Font name="Gill Sans Nova Light" size="16.0" />
+                     </font>
+                     <toggleGroup>
+                        <ToggleGroup fx:id="typeEmploie" />
+                     </toggleGroup>
+                  </ToggleButton>
+                  <ToggleButton fx:id="typeEmploiePrepa" layoutX="267.0" layoutY="159.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="124.0" text="Préparateur" toggleGroup="$typeEmploie">
+                     <font>
+                        <Font name="Gill Sans Nova Light" size="16.0" />
+                     </font>
+                  </ToggleButton>
+                  <Label fx:id="salaireLabel" layoutX="47.0" layoutY="210.0" text="Salaire">
+                     <font>
+                        <Font name="Gill Sans Nova Cond XBd" size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="salaireTextField" layoutX="142.0" layoutY="206.0" prefHeight="31.0" prefWidth="243.0" promptText="Salaire de l'employé / mois">
+                     <font>
+                        <Font name="Gill Sans Nova Light" size="15.0" />
+                     </font>
+                  </TextField>
+                  <Label fx:id="ancienneteLabel" layoutX="32.0" layoutY="210.0" text="Ancienneté">
+                     <font>
+                        <Font name="Gill Sans Nova Cond XBd" size="18.0" />
+                     </font>
+                  </Label>
+                  <ToggleButton fx:id="anciennete1erChoix" layoutX="136.0" layoutY="206.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="80.0" text="0 &lt; 3 ans">
+                     <font>
+                        <Font name="Gill Sans Nova Light" size="16.0" />
+                     </font>
+                  </ToggleButton>
+                  <ToggleButton fx:id="anciennete1erChoix1" layoutX="216.0" layoutY="206.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="80.0" text="3 &lt; 7 ans">
+                     <font>
+                        <Font name="Gill Sans Nova Light" size="16.0" />
+                     </font>
+                  </ToggleButton>
+                  <ToggleButton fx:id="anciennete1erChoix11" layoutX="296.0" layoutY="206.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="93.0" text="7 ans et +">
+                     <font>
+                        <Font name="Gill Sans Nova Light" size="16.0" />
+                     </font>
+                  </ToggleButton>
+                  <Label fx:id="adresseLabel1" layoutX="25.0" layoutY="114.0" prefHeight="24.0" prefWidth="110.0" text="Horaire / mois">
+                     <font>
+                        <Font name="Gill Sans Nova Cond XBd" size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="horaireMoisTextField" layoutX="142.0" layoutY="110.0" prefHeight="31.0" prefWidth="243.0">
+                     <font>
+                        <Font name="Gill Sans Nova Light" size="15.0" />
+                     </font>
+                  </TextField>
+                  <Label fx:id="typeEmploieLabel1" layoutX="24.0" layoutY="164.0" text="Taux horaire">
+                     <font>
+                        <Font name="Gill Sans Nova Cond XBd" size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="tauxHoraireTextFIeld" layoutX="142.0" layoutY="160.0" prefHeight="31.0" prefWidth="243.0">
                      <font>
                         <Font name="Gill Sans Nova Light" size="15.0" />
                      </font>
