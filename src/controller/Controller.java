@@ -53,6 +53,9 @@ public class Controller {
     private TextField NbrItemField;
 
     @FXML
+    private TextField TailleComField;
+
+    @FXML
     private TextField PrixItemField;
 
     @FXML
@@ -126,7 +129,7 @@ public class Controller {
     public void initialize(PharmacienManager pharmacienManager, Thread thread) {
 
         TypeComCombo.getItems().addAll("Indépendant","Franchisé");
-        CompteComCombo.getItems().addAll("Classique","Client");
+        CompteComCombo.getItems().addAll("Classique","Franchisé");
         ReseauComCombo.getItems().addAll("Visa","Mastercard");
         TypeComCombo.getSelectionModel().selectFirst();
         CompteComCombo.getSelectionModel().selectFirst();
@@ -220,6 +223,8 @@ public class Controller {
                     System.out.println(newValue.getNom());
                     NameComField.setText(newValue.getNom());
                     NbrEmpComField.setText(newValue.getNbEmploye()+"");
+                    BonusComField.setText(newValue.getSiret()+"");
+                    TailleComField.setText(newValue.getTaille()+"");
                     ItemListview.setItems(selectedcom.getListeProduit());
                 } catch(Exception ex) {
 
@@ -320,10 +325,10 @@ public class Controller {
 
 
                 if(TypeComCombo.getValue().equals("Indépendant")){
-                    Pharmacie x = new PharmacieIndependante(NameComField.getText(),compte, /*Integer.parseInt(TaillePharma.getText())*/ 20,BonusComField.getText());
+                    Pharmacie x = new PharmacieIndependante(NameComField.getText(),compte, Integer.parseInt(TailleComField.getText()),BonusComField.getText());
                     pharmacienManager.addPharma(x);
                 } else {
-                    Pharmacie x = new PharmacieFranchise(NameComField.getText(),compte, /*Integer.parseInt(TaillePharma.getText())*/ 20,BonusComField.getText());
+                    Pharmacie x = new PharmacieFranchise(NameComField.getText(),compte, Integer.parseInt(TailleComField.getText()),BonusComField.getText());
                     pharmacienManager.addPharma(x);
                 }
 
