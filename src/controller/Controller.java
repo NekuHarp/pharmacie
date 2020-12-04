@@ -1,4 +1,9 @@
 package controller;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import modele.comptebancaire.CompteBancaire;
 import modele.comptebancaire.CompteClassique;
 import modele.comptebancaire.CompteFranchise;
@@ -19,10 +24,13 @@ import javafx.scene.control.*;
 import javafx.event.ActionEvent;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
+
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.Month;
 
 import modele.reseaubancaire.Visa;
+import vue.Main;
 
 public class Controller {
 
@@ -228,7 +236,7 @@ public class Controller {
                     ReseauComCombo.setDisable(true);
 
                     selectedcom=newValue;
-
+                    System.out.println(newValue.getNom());
                     NameComField.setText(newValue.getNom());
                     NbrEmpComField.setText(newValue.getNbEmploye()+"");
                     ItemListview.setItems(selectedcom.getListeProduit());
@@ -549,6 +557,29 @@ public class Controller {
                 ft.play();
                 ItemFormPane.setDisable(true);
 
+            }
+        });
+
+        CancelBtn.setOnAction((event) -> {
+            FXMLLoader loader = new FXMLLoader(Main.class.getResource("Menu.fxml"));
+            AnchorPane page = null;
+            try {
+                page = (AnchorPane) loader.load();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Scene nouvelleFenetre = new Scene(page, 800, 600);
+            Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            primaryStage.setScene(nouvelleFenetre);
+            primaryStage.setResizable(false);
+            primaryStage.show();
+            ControllerMenu controller = loader.<ControllerMenu>getController();
+
+            try {
+                controller.initialize(pharmacienManager, null);
+            } catch (Exception e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
             }
         });
 
