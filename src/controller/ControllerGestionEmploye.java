@@ -6,8 +6,13 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import modele.comptebancaire.CompteBancaire;
 import modele.comptebancaire.CompteClassique;
@@ -21,7 +26,9 @@ import modele.produit.Produit;
 import modele.reseaubancaire.Mastercard;
 import modele.reseaubancaire.ReseauBancaire;
 import modele.reseaubancaire.Visa;
+import vue.Main;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.Month;
 
@@ -553,6 +560,29 @@ public class ControllerGestionEmploye {
                 ft.play();
                 ItemFormPane.setDisable(true);
 
+            }
+        });
+
+        CancelBtn.setOnAction((event) -> {
+            FXMLLoader loader = new FXMLLoader(Main.class.getResource("Menu.fxml"));
+            AnchorPane page = null;
+            try {
+                page = (AnchorPane) loader.load();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Scene nouvelleFenetre = new Scene(page, 800, 600);
+            Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            primaryStage.setScene(nouvelleFenetre);
+            primaryStage.setResizable(false);
+            primaryStage.show();
+            ControllerMenu controller = loader.<ControllerMenu>getController();
+
+            try {
+                controller.initialize(pharmacienManager, null);
+            } catch (Exception e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
             }
         });
 
