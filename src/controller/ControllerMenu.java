@@ -21,6 +21,9 @@ public class ControllerMenu {
     private Button gestionPharma;
 
     @FXML
+    private Button gestionEmployes;
+
+    @FXML
     public void initialize(PharmacienManager pharmacienManager, Thread thread) {
 
         gestionPharma.setOnAction((event) -> {
@@ -40,6 +43,29 @@ public class ControllerMenu {
 
             try {
                 controller.initialize(pharmacienManager, null);
+            } catch (Exception e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        });
+
+        gestionEmployes.setOnAction((event) -> {
+            FXMLLoader loader2 = new FXMLLoader(Main.class.getResource("GestionEmploye.fxml"));
+            Pane page2 = null;
+            try {
+                page2 = (Pane) loader2.load();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Scene nouvelleFenetre2 = new Scene(page2, 800, 600);
+            Stage secondStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            secondStage.setScene(nouvelleFenetre2);
+            secondStage.setResizable(false);
+            secondStage.show();
+            ControllerGestionEmploye controller2 = loader2.<ControllerGestionEmploye>getController();
+
+            try {
+                controller2.initialize(pharmacienManager, null);
             } catch (Exception e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
