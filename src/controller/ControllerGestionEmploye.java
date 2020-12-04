@@ -1,4 +1,14 @@
 package controller;
+
+import javafx.animation.FadeTransition;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.scene.control.*;
+import javafx.scene.layout.Pane;
+import javafx.util.Duration;
 import modele.comptebancaire.CompteBancaire;
 import modele.comptebancaire.CompteClassique;
 import modele.comptebancaire.CompteFranchise;
@@ -10,21 +20,12 @@ import modele.pharmacie.PharmacieIndependante;
 import modele.produit.Produit;
 import modele.reseaubancaire.Mastercard;
 import modele.reseaubancaire.ReseauBancaire;
-import javafx.animation.*;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.event.EventHandler;
-import javafx.fxml.FXML;
-import javafx.scene.control.*;
-import javafx.event.ActionEvent;
-import javafx.scene.layout.Pane;
-import javafx.util.Duration;
+import modele.reseaubancaire.Visa;
+
 import java.time.LocalDate;
 import java.time.Month;
 
-import modele.reseaubancaire.Visa;
-
-public class Controller {
+public class ControllerGestionEmploye {
 
     @FXML
     private Pane ComFormPane;
@@ -123,8 +124,11 @@ public class Controller {
     private Pharmacie selectedcom;
     private Produit selecteditem;
 
+    public ControllerGestionEmploye() {
+    }
+
     @FXML
-    public void initialize(PharmacienManager pharmacienManager, Thread thread) {
+    private void initialize(PharmacienManager pharmacienManager, Thread thread) {
 
         TypeComCombo.getItems().addAll("Indépendant","Franchisé");
         CompteComCombo.getItems().addAll("Classique","Client");
