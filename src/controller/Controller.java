@@ -50,9 +50,6 @@ public class Controller {
     private TextField NbrEmpComField;
 
     @FXML
-    private TextField CompteComField;
-
-    @FXML
     private TextField NbrItemField;
 
     @FXML
@@ -66,9 +63,6 @@ public class Controller {
 
     @FXML
     private TextField BonusComField;
-
-    @FXML
-    private DatePicker DateComPicker;
 
     @FXML
     private DatePicker DateItemPicker;
@@ -117,9 +111,6 @@ public class Controller {
 
     @FXML
     private Label TypeComLabel;
-
-    @FXML
-    private Label NumComLabel;
 
     @FXML
     private Label CompteComLabel;
@@ -204,16 +195,6 @@ public class Controller {
                     ft.setToValue(0);
                     ft.play();
                     TypeComCombo.setDisable(true);
-                    ft = new FadeTransition(Duration.millis(200), NumComLabel);
-                    ft.setFromValue(0);
-                    ft.setToValue(0);
-                    ft.play();
-                    NumComLabel.setDisable(true);
-                    ft = new FadeTransition(Duration.millis(200), CompteComField);
-                    ft.setFromValue(0);
-                    ft.setToValue(0);
-                    ft.play();
-                    CompteComField.setDisable(true);
                     ft = new FadeTransition(Duration.millis(200), CompteComLabel);
                     ft.setFromValue(0);
                     ft.setToValue(0);
@@ -278,7 +259,7 @@ public class Controller {
                     NbrItemField.setDisable(true);
                     NbrItemField.setText("1");
                     VarItemField.setText(newValue.getType());
-                    DateComPicker.setValue(newValue.getDatePeremption());
+                    DateItemPicker.setValue(newValue.getDatePeremption());
                     PrixItemField.setText(newValue.getPrixAchat()+""); // pris initial = prix achat non ?
                 } catch(Exception ex) {
 
@@ -395,16 +376,6 @@ public class Controller {
                 ft.setToValue(1);
                 ft.play();
                 TypeComCombo.setDisable(false);
-                ft = new FadeTransition(Duration.millis(200), NumComLabel);
-                ft.setFromValue(0);
-                ft.setToValue(1);
-                ft.play();
-                NumComLabel.setDisable(false);
-                ft = new FadeTransition(Duration.millis(200), CompteComField);
-                ft.setFromValue(0);
-                ft.setToValue(1);
-                ft.play();
-                CompteComField.setDisable(false);
                 ft = new FadeTransition(Duration.millis(200), CompteComLabel);
                 ft.setFromValue(0);
                 ft.setToValue(1);
@@ -429,9 +400,7 @@ public class Controller {
                 NameComField.setText("");
                 TypeComCombo.getSelectionModel().selectFirst();
                 NbrEmpComField.setText("");
-                DateComPicker.setValue(LocalDate.now());
                 BonusComField.setText("");
-                CompteComField.setText("");
                 CompteComCombo.getSelectionModel().selectFirst();
                 ReseauComCombo.getSelectionModel().selectFirst();
             }
@@ -470,7 +439,7 @@ public class Controller {
                 Produit temp = selecteditem;
 
                 temp.setNom(NameItemField.getText());
-                temp.setDatePeremption(DateComPicker.getValue());
+                temp.setDatePeremption(DateItemPicker.getValue());
                 temp.setType(VarItemField.getText());
                 temp.setPrixAchat(Double.parseDouble(PrixItemField.getText())); // prix achat = prix initial non ?
 
@@ -497,7 +466,7 @@ public class Controller {
                 for(int i = 0; i<Integer.parseInt(NbrItemField.getText());i++){
                     // TODO : ici prix achat = prix de vente -> à modifier
                     // TODO : ajouter un champ ds sample pour savoir quel sera le prix de vente
-                    Produit temp = new Produit(NameItemField.getText(),VarItemField.getText(),Double.parseDouble(PrixItemField.getText()), Double.parseDouble(PrixItemField.getText()),DateComPicker.getValue());
+                    Produit temp = new Produit(NameItemField.getText(),VarItemField.getText(),Double.parseDouble(PrixItemField.getText()), Double.parseDouble(PrixItemField.getText()),DateItemPicker.getValue());
                     selectedcom.getListeProduit().add(temp);
                     selectedcom.getCompte().debiter(Double.parseDouble(PrixItemField.getText()));
 
