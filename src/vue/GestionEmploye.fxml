@@ -19,14 +19,6 @@
             <Pane fx:id="ComListPane" prefHeight="300.0" prefWidth="400.0">
                <children>
                   <ListView id="ComListview" fx:id="ComListview" prefHeight="250.0" prefWidth="400.0" />
-                  <Button id="AddComBtn" fx:id="AddListComBtn" layoutX="14.0" layoutY="255.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="114.0" text="Ajouter">
-                     <font>
-                        <Font name="Gill Sans Nova Cond XBd" size="20.0" />
-                     </font></Button>
-                  <Button id="DeleteComBtn" fx:id="DeleteComBtn" layoutX="273.0" layoutY="255.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="114.0" text="Supprimer">
-                     <font>
-                        <Font name="Gill Sans Nova Cond XBd" size="20.0" />
-                     </font></Button>
                   <Button fx:id="CancelBtn" layoutX="147.0" layoutY="255.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="114.0" text="Menu">
                      <font>
                         <Font name="Gill Sans Nova Cond XBd" size="20.0" />
@@ -35,32 +27,28 @@
             </Pane>
             <Pane fx:id="ItemListPane" disable="true" opacity="0.0" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                <children>
-                  <ListView fx:id="ItemListview" prefHeight="250.0" prefWidth="400.0" />
-                  <Button fx:id="AddListItemBtn" layoutX="14.0" layoutY="255.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="114.0" text="Ajouter">
+                  <ListView fx:id="listEmployes" prefHeight="250.0" prefWidth="400.0" />
+                  <Button fx:id="ajoutEmploye" layoutX="14.0" layoutY="255.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="114.0" text="Ajouter">
                      <font>
                         <Font name="Gill Sans Nova Cond XBd" size="20.0" />
                      </font></Button>
-                  <Button fx:id="DeleteItemBtn" layoutX="254.0" layoutY="255.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="114.0" text="Supprimer">
+                  <Button fx:id="supprEmploye" layoutX="254.0" layoutY="255.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="114.0" text="Supprimer">
                      <font>
                         <Font name="Gill Sans Nova Cond XBd" size="20.0" />
                      </font></Button>
                </children></Pane>
             <Pane fx:id="ComFormPane" disable="true" opacity="0.0" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                <children>
-                  <Button fx:id="ValComBtn" layoutX="16.0" layoutY="256.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="368.0" text="Valider">
-                     <font>
-                        <Font name="Gill Sans Nova Cond XBd" size="18.0" />
-                     </font></Button>
                   <Label fx:id="TypeComLabel" layoutX="10.0" layoutY="46.0" text="Type">
                      <font>
                         <Font name="Gill Sans Nova Cond XBd" size="18.0" />
                      </font></Label>
-                  <TextField fx:id="NameComField" layoutX="62.0" layoutY="9.0" prefHeight="31.0" prefWidth="324.0" promptText="Nom de l'entreprise">
+                  <TextField fx:id="nomPharma" layoutX="62.0" layoutY="9.0" prefHeight="31.0" prefWidth="324.0" promptText="Nom de l'entreprise">
                      <font>
                         <Font name="Gill Sans Nova Light" size="15.0" />
                      </font></TextField>
                   <ComboBox fx:id="TypeComCombo" layoutX="62.0" layoutY="41.0" prefHeight="31.0" prefWidth="324.0" />
-                  <TextField fx:id="NbrEmpComField" disable="true" layoutX="143.0" layoutY="75.0" prefHeight="31.0" prefWidth="72.0" promptText="1">
+                  <TextField fx:id="nbEmployes" disable="true" layoutX="143.0" layoutY="75.0" prefHeight="31.0" prefWidth="72.0" promptText="1">
                      <font>
                         <Font name="Gill Sans Nova Light" size="15.0" />
                      </font></TextField>
@@ -85,10 +73,6 @@
                      <font>
                         <Font name="Gill Sans Nova Cond XBd" size="18.0" />
                      </font></Label>
-                  <Button fx:id="AddComBtn" layoutX="16.0" layoutY="256.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="368.0" text="Ajouter">
-                     <font>
-                        <Font name="Gill Sans Nova Cond XBd" size="20.0" />
-                     </font></Button>
                   <Label fx:id="ReseauComLabel" layoutX="15.0" layoutY="114.0" text="Réseau compte">
                      <font>
                         <Font name="Gill Sans Nova Cond XBd" size="18.0" />
@@ -114,7 +98,7 @@
                      <font>
                         <Font name="Gill Sans Nova Cond XBd" size="18.0" />
                      </font></Label>
-                  <TextField fx:id="nomEmployeTextField" layoutX="62.0" layoutY="10.0" prefHeight="31.0" prefWidth="324.0" promptText="Nom de l'employé">
+                  <TextField fx:id="nomEmploye" layoutX="62.0" layoutY="10.0" prefHeight="31.0" prefWidth="324.0" promptText="Nom de l'employé">
                      <font>
                         <Font name="Gill Sans Nova Light" size="16.0" />
                      </font>
@@ -129,7 +113,7 @@
                         <Font name="Gill Sans Nova Cond XBd" size="18.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="prenomEmployeTextField" layoutX="143.0" layoutY="57.0" prefHeight="33.0" prefWidth="243.0" promptText="Prénom de l'employé">
+                  <TextField fx:id="prenomEmploye" layoutX="143.0" layoutY="57.0" prefHeight="33.0" prefWidth="243.0" promptText="Prénom de l'employé">
                      <font>
                         <Font name="Gill Sans Nova Light" size="16.0" />
                      </font>
